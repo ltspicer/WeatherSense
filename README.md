@@ -1,9 +1,10 @@
 ## Daten vom WeatherSense Server auslesen und per MQTT versenden
 
+Handy Icon:
+
 ![Screenshot](https://github.com/ltspicer/WeatherSense/blob/main/weathersense.png)
 
-
-Beispiel diese Wifi Wetterstation von Ideoon (Pearl)
+Beispielsweise diese Wifi Wetterstation von Ideoon (Pearl):
 
 ![Screenshot](https://github.com/ltspicer/WeatherSense/blob/main/wetterstation.png)
 
