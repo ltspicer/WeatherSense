@@ -2,8 +2,11 @@
 
 ![Screenshot](https://github.com/ltspicer/WeatherSense/blob/main/weathersense.png)
 
-![Screenshot](https://github.com/ltspicer/WeatherSense/blob/main/wetterstation.png)
+
 Beispiel diese Wifi Wetterstation von Ideoon (Pearl)
+
+![Screenshot](https://github.com/ltspicer/WeatherSense/blob/main/wetterstation.png)
+
 
 
 Dieses Python3 Script liest die Daten vom WeatherSense Server und sendet diese per MQTT (mosquitto) an ein Smarthome System.
