@@ -48,8 +48,6 @@ JSON_PATH = ""                  # Pfad für die Json Datei. Standardpfad ist bei
 
 DELAY = False                   # Auf True setzen, wenn der MQTT Broker nur die 1. Zeile empfängt
 DEBUG = False                   # True = Debug Infos auf die Konsole.
-                                # Unbedingt nach debuggen zurück setzen!!
-                                # Be sure to reset after debugging!!
 
 ###################################################################################################
 ###################################################################################################
