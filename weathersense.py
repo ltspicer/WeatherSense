@@ -264,7 +264,6 @@ def main():
         print("devData JSON:")
         print("=============")
         print()
-        #print(daten)
         print_all_keys(daten)
         print()
 
@@ -348,7 +347,6 @@ def main():
         print("forecast JSON:")
         print("==============")
         print()
-        #print(daten)
         print_all_keys(forecast)
         print()
 
