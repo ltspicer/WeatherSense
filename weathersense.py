@@ -254,7 +254,6 @@ def main():
         if DEBUG:
             print("Fehler. Keine devData Daten empfangen.")
         if MQTT_ACTIVE:
-            send_mqtt(client, "DevData", False)
             client.disconnect()
         return
 
@@ -339,9 +338,8 @@ def main():
     forecast = foreCast(token)
 
     if forecast == "error":
-        if DEBUG:
-            print("Fehler. Keine forecast Daten empfangen.")
-            return
+        print("Fehler. Keine forecast Daten empfangen.")
+        return
 
     if CREATE_JSON:
         json_object = json.dumps(forecast, indent=4)
