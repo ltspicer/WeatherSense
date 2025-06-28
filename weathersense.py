@@ -161,7 +161,8 @@ def send_forecasts(client, forecasts):
 
 def devData(token):
     """WeatherSense Daten holen"""
-
+    if DEBUG:
+        print("getRealtime data...")
     url = "https://emaxlife.net/V1.0/weather/devData/getRealtime"
     headers = {
         "emaxtoken": token,
@@ -187,7 +188,7 @@ def devData(token):
         return "error"
 
 def foreCast(token):
-    """Berechnete zukünftige Oelstände holen"""
+    """Forecast holen"""
     if DEBUG:
         print("getForecast data...")
     url = "https://emaxlife.net/V1.0/weather/netData/getForecast"
