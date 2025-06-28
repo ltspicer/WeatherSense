@@ -251,8 +251,7 @@ def main():
 
     daten = devData(token)
     if daten == "error":
-        if DEBUG:
-            print("Fehler. Keine devData Daten empfangen.")
+        print("Fehler. Keine devData Daten empfangen.")
         if MQTT_ACTIVE:
             client.disconnect()
         return
