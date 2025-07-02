@@ -71,7 +71,7 @@ print("Datenabfrage startet in", verzoegerung, "Sekunden")
 time.sleep(verzoegerung)
 
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
-MD5_KEY = "emax@pwd123"
+
 LOGIN_URL = "https://47.52.149.125/V1.0/account/login"
 
 def print_all_keys(d, prefix=""):
@@ -98,13 +98,13 @@ def find_value(sensor_list, typ, channel):
     return None
 
 # Funktion zur Erzeugung des MD5-Hashes
-def hash_password(pw: str, key: str) -> str:
-    combined = pw + key
+def hash_password(pw: str) -> str:
+    combined = pw + "emax@pwd123"
     return hashlib.md5(combined.encode("utf-8")).hexdigest().upper()
 
 # Login-Funktion
 def login():
-    hashed_pw = hash_password(PASSWORD, MD5_KEY)
+    hashed_pw = hash_password(PASSWORD)
 
     headers = {
         "Content-Type": "application/json; charset=utf-8",
