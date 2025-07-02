@@ -4,6 +4,8 @@ Handy Icon:
 
 ![Screenshot](https://github.com/ltspicer/WeatherSense/blob/main/weathersense.png)
 
+Manche Wifi Wetterstationen nutzen die WeatherSense Cloud.
+
 Beispielsweise diese Wifi Wetterstation von Ideoon (Pearl):
 
 ![Screenshot](https://github.com/ltspicer/WeatherSense/blob/main/wetterstation.png)
