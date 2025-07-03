@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 
 ###################################################################################################
-#################################             V1.0               ##################################
+#################################             V1.1               ##################################
 #############################  WeatherSense-Daten per MQTT versenden  #############################
 #################################   (C) 2025 Daniel Luginbühl    ##################################
 ###################################################################################################
@@ -61,6 +61,7 @@ import requests
 import hashlib
 import paho.mqtt.client as mqtt
 import urllib3
+import base64
 
 # Zufällige Zeitverzögerung 0 bis 59 Sekunden. Wichtig, damit der WeatherSense Server
 # nicht immer zur gleichen Zeit bombardiert wird!!
@@ -99,7 +100,8 @@ def find_value(sensor_list, typ, channel):
 
 # Funktion zur Erzeugung des MD5-Hashes
 def hash_password(pw: str) -> str:
-    combined = pw + "emax@pwd123"
+    key = base64.b64decode("ZW1heEBwd2QxMjM=").decode("utf-8")
+    combined = pw + key
     return hashlib.md5(combined.encode("utf-8")).hexdigest().upper()
 
 # Login-Funktion
