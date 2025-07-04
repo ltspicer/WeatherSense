@@ -34,6 +34,11 @@ Wenn nur die erste Zeile übermittelt wird (kann vorkommen, wenn zBsp das weathe
 
 ## Changelog
 
+### V1.1 (2025-07-03)
+
+- Zufällige Verzögerung 0-59s
+
+
 ### V1.0 (2025-06-28)
 
 - Erstes Release
