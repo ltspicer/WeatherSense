@@ -34,6 +34,10 @@ Wenn nur die erste Zeile übermittelt wird (kann vorkommen, wenn zBsp das weathe
 
 ## Changelog
 
+### V1.2 (2025-07-05)
+
+- Alle Felder in devData.json per MQTT versenden
+
 ### V1.1 (2025-07-03)
 
 - Zufällige Verzögerung 0-59s
