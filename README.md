@@ -34,6 +34,11 @@ Wenn nur die erste Zeile übermittelt wird (kann vorkommen, wenn zBsp das weathe
 
 ## Changelog
 
+### V1.3 (2025-07-18)
+
+- Hardgecodete IP durch Domain ersetzt
+
+
 ### V1.2 (2025-07-05)
 
 - Alle Felder in devData.json per MQTT versenden
