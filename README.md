@@ -22,17 +22,23 @@ Die Rechte auf 754 setzen ( chmod 754 weathersense.py )
 
 Crontab erstellen ( crontab -e ):
 
-*/5 * * * * /home/pi/weathersense.py # Pfad ggf anpassen!
+*/10 * * * * /home/pi/weathersense.py # Pfad ggf anpassen!
 
 Weitere Instruktionen sind im Script-Kopf zufinden. Da werden auch die notwendigen Daten wie Logins, IP Adresse, Passwörter usw. eingetragen.
 
 Hier können auch die json Dateien devData.json und forecast.json angefordert werden.
 
-Wenn nur die erste Zeile übermittelt wird (kann vorkommen, wenn zBsp das weathersense.py Script auf dem gleichen Host wie das Smarthome System läuft), dann DELAY im Scriptkopf auf True setzen.
-
 
 
 ## Changelog
+
+
+### V1.4 (2025-08-16)
+
+- Datenpunkte dynamischer
+- Kanäle korrekt ausgeben
+- Ausgabe der Statusdaten
+
 
 ### V1.3 (2025-07-18)
 
@@ -67,11 +73,9 @@ Set the permissions to 754 (chmod 754 weathersense.py).
 
 Create crontab (crontab -e):
 
-*/5 * * * * /home/pi/weathersense.py # Adjust the path if necessary!
+*/10 * * * * /home/pi/weathersense.py # Adjust the path if necessary!
 
 Further instructions can be found in the script header. The necessary data such as logins, IP address, passwords, etc. are also entered there.
 
 The json files devData.json and forecast.json can also be requested here.
-
-If only the first line is transmitted (this can happen if, for example, the weathersense.py script is running on the same host as the smart home system), set DELAY to True in the script header.
 
