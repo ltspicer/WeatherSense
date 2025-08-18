@@ -33,6 +33,11 @@ Hier können auch die json Dateien devData.json und forecast.json angefordert we
 ## Changelog
 
 
+### V2.0 (2025-08-18)
+
+- Type und Channel Position getauscht für sinnvollere Sortierung
+
+
 ### V1.4 (2025-08-16)
 
 - Datenpunkte dynamischer
