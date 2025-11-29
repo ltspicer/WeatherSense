@@ -6,10 +6,11 @@ Handy Icon:
 
 Manche Wifi Wetterstationen nutzen die WeatherSense Cloud.
 
-Beispielsweise diese Wifi Wetterstation von Ideoon (Pearl):
+Beispielsweise diese Wifi Wetterstationen von Ideoon (Pearl):
 
 ![Screenshot](https://github.com/ltspicer/WeatherSense/blob/main/wetterstation.png)
 
+![Screenshot](https://github.com/ltspicer/WeatherSense/blob/main/casativo_ideoon_weatherstation.png)
 
 
 Dieses Python3 Script liest die Daten vom WeatherSense Server und sendet diese per MQTT (mosquitto) an ein Smarthome System.
