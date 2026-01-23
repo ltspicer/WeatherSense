@@ -33,6 +33,11 @@ Hier können auch die json Dateien devData.json und forecast.json angefordert we
 
 ## Changelog
 
+### V2.1 (2026-01-23)
+
+- "All status OK" flag added
+- MQTT topic changed from WEATHERSENSE to WeatherSense
+
 
 ### V2.0 (2025-08-18)
 

@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 
 ###################################################################################################
-#################################             V2.0               ##################################
+#################################             V2.1               ##################################
 #############################  WeatherSense-Daten per MQTT versenden  #############################
 #################################   (C) 2025 Daniel Luginbühl    ##################################
 ###################################################################################################
@@ -83,6 +83,24 @@ def print_all_keys(d, prefix=""):
             print_all_keys(item, prefix + str(i) + "/")
     else:
         print(f"{prefix}: {d}")
+
+def is_success(data):
+    try:
+        if not data["status"] == 0:
+            print("status:", data["status"])
+            return False
+        if not data["error"] == 0:
+            print("error:", data["error"])
+            return False
+        if not data["message"] == "success":
+            print("message:", data["message"])
+            return False
+        if data["content"].get("powerStatus") == 0:
+            print("content/powerStatus:", data["content"].get("powerStatus"))
+            return False
+        return True
+    except KeyError:
+        return False
 
 # Funktion zum senden per MQTT
 def send_mqtt(client, topic, wert):
@@ -259,6 +277,8 @@ def main():
     if daten == "error":
         print("Fehler. Keine devData Daten empfangen.")
         if MQTT_ACTIVE:
+            send_mqtt(client, "allStatesOk", False)
+            time.sleep(0.1)
             client.disconnect()
         return
 
@@ -274,6 +294,8 @@ def main():
         print()
         print_all_keys(daten)
         print()
+
+    status = is_success(daten)
 
     if MQTT_ACTIVE:
         for key, value in daten.items():
@@ -323,6 +345,8 @@ def main():
 
     if forecast == "error":
         print("Fehler. Keine forecast Daten empfangen.")
+        if MQTT_ACTIVE:
+            send_mqtt(client, "allStatesOk", False)
         return
 
     if CREATE_JSON:
@@ -347,8 +371,15 @@ def main():
         # neue senden
         send_forecasts(client, forecasts)
 
+        if status:
+            status = is_success(forecast)
+
         time.sleep(0.1)
+        send_mqtt(client, "allStatesOk", status)
         client.disconnect()
+
+    if DEBUG:
+        print(f"allStatesOk: {status}")
 
 if __name__ == "__main__":
     main()
