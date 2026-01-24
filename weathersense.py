@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 
 ###################################################################################################
-#################################             V2.1               ##################################
+#################################             V2.2               ##################################
 #############################  WeatherSense-Daten per MQTT versenden  #############################
 #################################   (C) 2025 Daniel Luginbühl    ##################################
 ###################################################################################################
@@ -277,7 +277,7 @@ def main():
     if daten == "error":
         print("Fehler. Keine devData Daten empfangen.")
         if MQTT_ACTIVE:
-            send_mqtt(client, "allStatesOk", False)
+            send_mqtt(client, "AllStatesOk", False)
             time.sleep(0.1)
             client.disconnect()
         return
@@ -346,7 +346,8 @@ def main():
     if forecast == "error":
         print("Fehler. Keine forecast Daten empfangen.")
         if MQTT_ACTIVE:
-            send_mqtt(client, "allStatesOk", False)
+            send_mqtt(client, "AllStatesOk", False)
+            client.disconnect()
         return
 
     if CREATE_JSON:
@@ -375,11 +376,11 @@ def main():
             status = is_success(forecast)
 
         time.sleep(0.1)
-        send_mqtt(client, "allStatesOk", status)
+        send_mqtt(client, "AllStatesOk", status)
         client.disconnect()
 
     if DEBUG:
-        print(f"allStatesOk: {status}")
+        print(f"AllStatesOk: {status}")
 
 if __name__ == "__main__":
     main()

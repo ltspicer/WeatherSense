@@ -33,6 +33,12 @@ Hier können auch die json Dateien devData.json und forecast.json angefordert we
 
 ## Changelog
 
+
+### V2.2 (2026-01-24)
+
+- DP renamed from allStatesOk to AllStatesOk
+
+
 ### V2.1 (2026-01-23)
 
 - "All status OK" flag added
