@@ -33,6 +33,9 @@ Hier können auch die json Dateien devData.json und forecast.json angefordert we
 
 ## Changelog
 
+### V2.3 (2026-03-06)
+
+- "Ignore powerStatus:0" option added
 
 ### V2.2 (2026-01-24)
 

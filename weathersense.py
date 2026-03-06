@@ -1,9 +1,9 @@
 #!/usr/bin/python3
 
 ###################################################################################################
-#################################             V2.2               ##################################
+#################################             V2.3               ##################################
 #############################  WeatherSense-Daten per MQTT versenden  #############################
-#################################   (C) 2025 Daniel Luginbühl    ##################################
+#################################   (C) 2026 Daniel Luginbühl    ##################################
 ###################################################################################################
 
 ####################################### WICHTIGE INFOS ############################################
@@ -45,6 +45,9 @@ MQTT_ACTIVE = True              # Auf False, wenn nichts MQTT published werden s
 CREATE_JSON = True              # True = erstelle devData.json und forecast.json
 JSON_PATH = ""                  # Pfad für die Json Datei. Standardpfad ist bei Script.
                                 # sonst zBsp.: JSON_PATH = "/home/pi/"
+
+IGNORE_POWER_STATUS = False     # Manche Geräte senden 0, obschon der powerStatus OK ist
+                                # In diesem Fall kann dies hier mit "True" ignoriert werden.
 
 DEBUG = False                   # True = Debug Infos auf die Konsole.
 
@@ -96,8 +99,12 @@ def is_success(data):
             print("message:", data["message"])
             return False
         if data["content"].get("powerStatus") == 0:
-            print("content/powerStatus:", data["content"].get("powerStatus"))
-            return False
+            if IGNORE_POWER_STATUS:
+                if DEBUG:
+                    print("content/powerStatus:", data["content"].get("powerStatus"), " → Must normally be greater than 0")
+            else:
+                print("content/powerStatus:", data["content"].get("powerStatus"), "→ Power supply OK?")
+                return False
         return True
     except KeyError:
         return False
