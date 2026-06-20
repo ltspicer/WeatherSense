@@ -33,6 +33,14 @@ Hier können auch die json Dateien devData.json und forecast.json angefordert we
 
 ## Changelog
 
+### V3.0 (2026-06-20)
+
+- Added automatic sea‑level pressure correction for atmos values based on the configured altitude (altitude_masl).
+- Added configuration options for:
+  - Rain unit (mm or inch)
+  - Temperature unit (°C or °F)
+- Previous combined JSON objects are now stored as separate, individual data points to improve clarity and reduce parsing overhead.
+
 ### V2.3 (2026-03-06)
 
 - "Ignore powerStatus:0" option added
