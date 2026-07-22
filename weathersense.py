@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 
 ###################################################################################################
-#################################             V3.3               ##################################
+#################################             V3.4               ##################################
 #############################  WeatherSense-Daten per MQTT versenden  #############################
 #################################   (C) 2026 Daniel Luginbühl    ##################################
 ###################################################################################################
@@ -68,6 +68,12 @@ import urllib3
 import base64
 import os
 
+if not isinstance(DEVICE_ID, int):
+    raise TypeError("DEVICE_ID muss eine positive Ganzzahl (Integer) sein")
+
+if DEVICE_ID < 1 or DEVICE_ID > 99:
+    raise ValueError("DEVICE_ID muss eine Zahl von 1 bis 99 sein")
+
 # Zufällige Zeitverzögerung 0 bis 59 Sekunden. Wichtig, damit der WeatherSense Server
 # nicht immer zur gleichen Zeit bombardiert wird!!
 verzoegerung = random.randint(0,59)
@@ -79,7 +85,7 @@ time.sleep(verzoegerung)
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
-TOPIC_FILE = os.path.join(SCRIPT_DIR, "weathersense_topics.txt")
+TOPIC_FILE = os.path.join(SCRIPT_DIR, f"weathersense_topics_DEVICE_ID_{DEVICE_ID}.txt")
 
 topics_sent_runtime = set()
 

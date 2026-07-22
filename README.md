@@ -45,6 +45,10 @@ Um die Daten von mehreren Stationen gleichzeitig und ohne Konflikte auszulesen, 
 
 ## Changelog
 
+### V3.4 (2026-07-22)
+
+- Bugfix: New name “weathersense_topics_DEVICE_ID_{DEVICE_ID}.txt”
+
 ### V3.3 (2026-07-22)
 
 - Bugfix: Path to “weathersense_topics.txt” in the script directory
