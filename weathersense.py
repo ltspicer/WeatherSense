@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 
 ###################################################################################################
-#################################             V3.2               ##################################
+#################################             V3.3               ##################################
 #############################  WeatherSense-Daten per MQTT versenden  #############################
 #################################   (C) 2026 Daniel Luginbühl    ##################################
 ###################################################################################################
@@ -78,7 +78,9 @@ time.sleep(verzoegerung)
 
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
-TOPIC_FILE = "weathersense_topics.txt"
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+TOPIC_FILE = os.path.join(SCRIPT_DIR, "weathersense_topics.txt")
+
 topics_sent_runtime = set()
 
 LOGIN_URL = "https://emaxlife.net/V1.0/account/login"

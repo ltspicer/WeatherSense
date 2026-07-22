@@ -45,6 +45,10 @@ Um die Daten von mehreren Stationen gleichzeitig und ohne Konflikte auszulesen, 
 
 ## Changelog
 
+### V3.3 (2026-07-22)
+
+- Bugfix: Path to “weathersense_topics.txt” in the script directory
+
 ### V3.2 (2026-07-22)
 
 - Set existing data point to 0 if not provided by the cloud
