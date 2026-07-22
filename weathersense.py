@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 
 ###################################################################################################
-#################################             V3.0               ##################################
+#################################             V3.2               ##################################
 #############################  WeatherSense-Daten per MQTT versenden  #############################
 #################################   (C) 2026 Daniel Luginbühl    ##################################
 ###################################################################################################
@@ -66,6 +66,7 @@ import hashlib
 import paho.mqtt.client as mqtt
 import urllib3
 import base64
+import os
 
 # Zufällige Zeitverzögerung 0 bis 59 Sekunden. Wichtig, damit der WeatherSense Server
 # nicht immer zur gleichen Zeit bombardiert wird!!
@@ -77,7 +78,43 @@ time.sleep(verzoegerung)
 
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
+TOPIC_FILE = "weathersense_topics.txt"
+topics_sent_runtime = set()
+
 LOGIN_URL = "https://emaxlife.net/V1.0/account/login"
+
+def ensure_topic_logged(device_id, topic):
+    """Persist {device_id}/{topic} once."""
+    full_topic = f"{device_id}/{topic}"
+
+    # Datei anlegen, falls nicht vorhanden
+    if not os.path.exists(TOPIC_FILE):
+        with open(TOPIC_FILE, "w") as f:
+            pass  # leere Datei erzeugen
+
+    # Prüfen, ob Topic schon existiert
+    with open(TOPIC_FILE, "r") as f:
+        existing = {line.strip() for line in f}
+
+    if full_topic not in existing:
+        with open(TOPIC_FILE, "a") as f:
+            f.write(full_topic + "\n")
+
+def send_missing_topics_zero(client):
+    """Alle Topics aus Datei, die NICHT gesendet wurden → 0 senden."""
+    if not os.path.exists(TOPIC_FILE):
+        return
+
+    with open(TOPIC_FILE, "r") as f:
+        all_topics = {line.strip() for line in f}
+
+    missing = all_topics - topics_sent_runtime
+
+    for full_topic in missing:
+        if not full_topic.endswith("AllStatesOk"):
+            client.publish(f"WeatherSense/{full_topic}", "0", qos=0, retain=True)
+            if DEBUG:
+                print(f"WeatherSense/{full_topic} set to 0")
 
 def is_invalid(v):
     return v in (None, 65535, 255)
@@ -163,9 +200,18 @@ def is_success(data):
 
 # Funktion zum senden per MQTT
 def send_mqtt(client, topic, wert):
-    """Send MQTT"""
+    """Send MQTT + track runtime topics + persist topics."""
+    full_topic = f"{DEVICE_ID}/{topic}"
+
+    # Runtime speichern
+    topics_sent_runtime.add(full_topic)
+
+    # Datei aktualisieren
+    ensure_topic_logged(DEVICE_ID, topic)
+
+    # MQTT senden
     payload = "" if wert is None else str(wert)
-    client.publish(f"WeatherSense/{DEVICE_ID}/{topic}", payload, qos=0, retain=True)
+    client.publish(f"WeatherSense/{full_topic}", payload, qos=0, retain=True)
 
 # Hilfsfunktion zum Suchen des Werts anhand von type und channel
 def find_value(sensor_list, typ, channel):
@@ -352,7 +398,7 @@ def main():
 
     if CREATE_JSON:
         json_object = json.dumps(daten, indent=4)
-        with open(JSON_PATH + "devData.json","w", encoding="utf-8") as datei:
+        with open(f"{JSON_PATH}weathersense.{DEVICE_ID}.devData.json","w", encoding="utf-8") as datei:
             datei.write(json_object)
 
     if DEBUG:
@@ -495,7 +541,7 @@ def main():
 
     if CREATE_JSON:
         json_object = json.dumps(forecast, indent=4)
-        with open(JSON_PATH + "forecast.json","w", encoding="utf-8") as datei:
+        with open(f"{JSON_PATH}weathersense.{DEVICE_ID}.forecast.json","w", encoding="utf-8") as datei:
             datei.write(json_object)
 
     if DEBUG:
@@ -518,7 +564,9 @@ def main():
         if status:
             status = is_success(forecast)
 
-        time.sleep(0.1)
+        send_missing_topics_zero(client)
+
+        time.sleep(0.2)
         send_mqtt(client, "AllStatesOk", status)
         client.disconnect()
 

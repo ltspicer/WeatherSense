@@ -27,11 +27,27 @@ Crontab erstellen ( crontab -e ):
 
 Weitere Instruktionen sind im Script-Kopf zufinden. Da werden auch die notwendigen Daten wie Logins, IP Adresse, Passwörter usw. eingetragen.
 
-Hier können auch die json Dateien devData.json und forecast.json angefordert werden.
+Hier können auch die json Dateien weathersense.{DEVICE-ID}.devData.json und weathersense.{DEVICE-ID}.forecast.json angefordert werden.
 
+## 🚀 Nutzung mehrerer Wetterstationen
 
+Der originale WeatherSense-Cloud-Server hat eine softwareseitige Einschränkung bzw. einen Bug: Wenn du zwei oder mehr identische Wetterstationen im selben Smartphone-Account registrierst, überschreiben sie sich gegenseitig und verschwinden aus deiner Geräteliste.
+
+Um die Daten von mehreren Stationen gleichzeitig und ohne Konflikte auszulesen, kannst du ganz einfach einen zweiten Account anlegen und die DEVICE_ID da auf 2 setzen.
+
+### Einrichten eines zweiten Accounts:
+
+1. **Separate Cloud-Accounts erstellen:** Registriere in der WeatherSense-App für **jede** deiner Wetterstationen einen eigenen, kostenlosen Account (z. B. *Email A* für Station 1 und *Email B* für Station 2).
+2. **Eine Station pro Account binden:** Kopple deine erste Station strikt mit Account A und deine zweite Station strikt mit Account B.
+3. **Zweites weathersense.py Script anlegen:**
+   * Script 1: Account A, DEVICE_ID = 1
+   * Script 2: Account B, DEVICE_ID = 2
 
 ## Changelog
+
+### V3.2 (2026-07-22)
+
+- Set existing data point to 0 if not provided by the cloud
 
 ### V3.0 (2026-06-20)
 
@@ -107,3 +123,16 @@ Further instructions can be found in the script header. The necessary data such 
 
 The json files devData.json and forecast.json can also be requested here.
 
+## Handling Multiple Weather Stations
+
+The original WeatherSense cloud server has a software limitation/bug: if you register two or more identical weather stations within the same smartphone account, they will overwrite each other and disappear from your device list.
+
+To read data from multiple stations at the same time without any conflicts, you can simply create a second account and set the DEVICE_ID to 2 there.
+
+### Setting up a second account:
+
+1. **Create Separate Cloud Accounts:** Register a unique, free account for **each** of your weather stations inside the WeatherSense mobile app (e.g., *email A* for Station 1 and *email B* for Station 2).
+2. **Bind One Station Per Account:** Pair your first station strictly with Account A and your second station strictly with Account B.
+3. **Create a second weathersense.py script:**
+   * Script 1: Account A, DEVICE_ID = 1
+   * Script 2: Account B, DEVICE_ID = 2
