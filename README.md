@@ -12,7 +12,6 @@ Beispielsweise diese Wifi Wetterstationen von Ideoon (Pearl):
 
 ![Screenshot](https://github.com/ltspicer/WeatherSense/blob/main/casativo_ideoon_weatherstation.png)
 
-
 Dieses Python3 Script liest die Daten vom WeatherSense Server und sendet diese per MQTT (mosquitto) an ein Smarthome System.
 
 Bedingung ist, dass ein MQTT Broker (Server) auf diesem Smarthome System läuft.
@@ -44,6 +43,11 @@ Um die Daten von mehreren Stationen gleichzeitig und ohne Konflikte auszulesen, 
    * Script 2: Account B, DEVICE_ID = 2
 
 ## Changelog
+
+### V3.5 (2026-09-25)
+
+- JSON_PATH: Default “data” subdirectory at the script location
+- JSON_PATH: The directory is created automatically
 
 ### V3.4 (2026-07-22)
 
